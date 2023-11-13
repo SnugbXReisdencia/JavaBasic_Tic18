@@ -45,8 +45,10 @@
 
 3. Explique o conceito de herança em Java e como você pode criar uma subclasse a partir de uma classe existente. Faça um paralelo com C++, apresentando 5 exemplos.
     - R: A herança é um conceito fundamental em programação orientada a objetos que permite criar uma nova classe, chamada subclasse, baseada em uma classe existente, chamada superclasse. A ideia principal é herdar as características (atributos e métodos) da superclasse, promovendo a reutilização de código e estabelecendo uma relação "é-um" entre as classes. Em Java, a herança é implementada usando a palavra-chave extends.
-    ![Alt text](printes/image-10.png)
-    -Paralelo com C++:
+  
+      ![Alt text](printes/image-10.png)
+
+    - Paralelo com C++:
         - Sintaxe de herança:
           - Java: ![Alt text](printes/image-11.png)
           - C++: ![Alt text](printes/image-12.png)
