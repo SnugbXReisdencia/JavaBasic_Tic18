@@ -3,6 +3,7 @@ package cliente;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 import RedeSocial.main;
 
 public class Usuario {
