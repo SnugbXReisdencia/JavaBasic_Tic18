@@ -1,4 +1,4 @@
-package cliente;
+package Usuario;
 
 import java.util.ArrayList;
 import java.util.Scanner;
