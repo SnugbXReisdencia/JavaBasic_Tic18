@@ -1,24 +1,25 @@
 package Model;
 
 public abstract class Parada {
-	private String nome;
+
+	private String descricao;
 	private String CEP;
 	private String Cidade;
 	private String UF;
 	
-	public Parada(String nome, String CEP, String Cidade, String UF) {
-		this.nome = nome;
+	public Parada(String descricao, String CEP, String Cidade, String UF) {
+		this.descricao = descricao;
 		this.CEP = CEP;
 		this.Cidade = Cidade;
 		this.UF = UF;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String nome) {
+		this.descricao = nome;
 	}
 
 	public String getCEP() {

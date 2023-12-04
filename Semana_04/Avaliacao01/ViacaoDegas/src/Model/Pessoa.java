@@ -1,6 +1,7 @@
 package Model;
 
 public class Pessoa {
+//	ESSA E UM MODELO DE PESSOA QUE VAI SER ERDADA POR MOTORISTA E PASSAGEIRO
 	private String nome;
 	private String cpf;
 	

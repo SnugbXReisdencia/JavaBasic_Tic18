@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Jornada {
+	
 	private ArrayList<Embarque> embarques;
 	private Date dataHoraInicio;
 	private Date dataHoraFim;

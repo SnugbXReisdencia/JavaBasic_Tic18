@@ -3,7 +3,7 @@ package Model;
 import java.util.ArrayList;
 
 public class Passageiro extends Pessoa{
-	
+//	ESSA E UM MODELO DE PASSAGEIRO QUE VAI SER USADA POR EMBARQUE E ERDA CARACTERISTICAS DE PESSOA
 	private String Numero_Cartao;
 	private ArrayList<Embarque> embarques;
 	
