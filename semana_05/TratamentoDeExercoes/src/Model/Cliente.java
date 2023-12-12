@@ -9,6 +9,7 @@ public class Cliente {
 	String nome;
 	Date dataNascimento;
 	String senha;
+	boolean bloqueado;
 	
 	ValidadorIdade validadorIdade;
 	public Cliente(String nome, Date dataNascimento, String senha) {
@@ -52,6 +53,16 @@ public class Cliente {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	
+
+	public boolean isBloqueado() {
+		return bloqueado;
+	}
+
+	public void setBloqueado(boolean bloqueado) {
+		this.bloqueado = bloqueado;
 	}
 
 	public static void main(String[] args) {

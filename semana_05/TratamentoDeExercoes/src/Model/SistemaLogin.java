@@ -31,25 +31,39 @@ public class SistemaLogin {
 
     public void login(String nomeUsuario, String senha) throws UsuarioErradoException, AutenticacaoFalhouException, UsuarioBloqueadoException {
         if (nomeUsuario.isEmpty()) {
-            throw new UsuarioErradoException();
+            throw new UsuarioErradoException(nomeUsuario);
         }
 
         Cliente usuario = this.usuarios.stream().filter(u -> u.getNome().equals(nomeUsuario)).findFirst().orElse(null);
         if (usuario == null) {
-            throw new UsuarioErradoException();
+            throw new UsuarioErradoException(nomeUsuario);
         } else if (senha.length() < 6) {
-            throw new AutenticacaoFalhouException();
+            throw new AutenticacaoFalhouException(senha);
         } else if (!usuario.getSenha().equals(senha)) {
             this.tentativasAutenticacao++;
             if (this.tentativasAutenticacao >= 3) {
                 usuario.setBloqueado(true);
                 throw new UsuarioBloqueadoException();
             } else {
-                throw new AutenticacaoFalhouException("A senha não está correta.");
+                throw new AutenticacaoFalhouException(senha);
             }
         } else {
             this.tentativasAutenticacao = 0;
         }
     }
+    
+    public static void main(String[] args) {
+		SistemaLogin sistemaLogin = new SistemaLogin();
+		
+		sistemaLogin.cadastrarUsuario("Joaquim", "123456");
+		sistemaLogin.cadastrarUsuario("admin", "1234567");
+		
+		try {
+			sistemaLogin.login("Joaquim", "123456");
+			System.out.println("Login efetuado com sucesso.");
+		} catch (UsuarioErradoException | AutenticacaoFalhouException | UsuarioBloqueadoException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }
 

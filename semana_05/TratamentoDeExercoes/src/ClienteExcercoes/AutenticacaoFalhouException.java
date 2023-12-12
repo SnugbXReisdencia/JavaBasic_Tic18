@@ -1,7 +1,11 @@
 package ClienteExcercoes;
 
 public class AutenticacaoFalhouException extends RuntimeException{
-	 String senha;
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	String senha;
 	 
 	 public AutenticacaoFalhouException(String senha) {
 		 this.senha = senha;
