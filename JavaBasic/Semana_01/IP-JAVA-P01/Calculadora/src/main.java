@@ -8,6 +8,9 @@ public class main {
 		Calculadora calculadora = new Calculadora();
 		int opcao, opc, num1, num2;
 		float num3, num4;
+		ArrayList<Number> list1;
+		ArrayList<Number> list2;
+		ArrayList<Number> result;
 
 		do {
 			opcao = MenuPrincipal();
@@ -111,18 +114,69 @@ public class main {
 				} while (opc != 0);
 				break;
 			case 3:
-				ArrayList<Number> list1;
-				ArrayList<Number> list2;
+				
 				list1 = GerarArrays();
 				if (list1 == null) {
+					JOptionPane.showMessageDialog(null, "Dados invalidos !!");
 					break;
 				}
-				list2 = GerarArrays();
+				list2 = GerarArrays();				
 				if (list2 == null) {
+					JOptionPane.showMessageDialog(null, "Dados invalidos !!");
 					break;
 				}
-				
-								
+				do {
+					opc = MenuOperacoes();
+					switch (opc) {
+						case 1:
+							try {
+								result = calculadora.Somar(list1, list2);
+								JOptionPane.showMessageDialog(null, "Soma: \n" + ImprimirArray(list1, list2, result, " + "));
+							}catch(Exception e){
+								JOptionPane.showMessageDialog(null, e.getMessage());
+							}
+							break;
+						case 2:
+							try {
+								result = calculadora.Subtrair(list1, list2);
+								JOptionPane.showMessageDialog(null, "Subtrair: \n" + ImprimirArray(list1, list2, result, " - "));
+							}catch(Exception e){
+								JOptionPane.showMessageDialog(null, e.getMessage());
+							}
+							break;
+						case 3:
+							try {
+								result = calculadora.Multiplicar(list1, list2);
+								JOptionPane.showMessageDialog(null, "Multiplicar: \n" + ImprimirArray(list1, list2, result, " * "));
+							}catch(Exception e){
+								JOptionPane.showMessageDialog(null, e.getMessage());
+							}
+							break;
+						case 4:
+							try {
+								result = calculadora.Dividir(list1, list2);
+								JOptionPane.showMessageDialog(null, "Dividir: \n" + ImprimirArray(list1, list2, result, " / "));
+							}catch(Exception e){
+								JOptionPane.showMessageDialog(null, e.getMessage());
+							}
+							break;
+						case 5:
+							try {
+								result = calculadora.Modulo(list1, list2);
+								JOptionPane.showMessageDialog(null, "Modulo: \n" + ImprimirArray(list1, list2, result, " % "));
+							}catch(Exception e){
+								JOptionPane.showMessageDialog(null, e.getMessage());
+							}
+							break;
+						case 0:
+							break;
+						default:
+							JOptionPane.showMessageDialog(null, "Opção inválida !!");
+							break;
+					}
+					
+				}while (opc != 0);
+				break;
 			case 0:
 				System.exit(0);
 			default:
@@ -200,12 +254,15 @@ public class main {
 		return array;
 	}
 	
-	public static void ImprimirArray(ArrayList<Number> a,ArrayList<Number> b,ArrayList<Number> array,String operador) {
+	public static String ImprimirArray(ArrayList<Number> a,ArrayList<Number> b,ArrayList<Number> array,String operador) {
+		String str = "######## RESULTADO ########\n";
 		if(array != null) {
 			for(int i = 0; i < array.size(); i++) {
-				JOptionPane.showMessageDialog(null, a.get(i) + " " + operador + " " + b.get(i) + " = " + array.get(i));
+				str += a.get(i) + " " + operador + " " + b.get(i) + " = " + array.get(i) + "\n";
 			}
+			return str;
 		}
+		return "Não foi possível realizar a operação !!";
 	}
 
 }
