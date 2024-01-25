@@ -1,5 +1,7 @@
 package configuration;
 
+import utilit.Utilit;
+
 public class Configuracao {
 	private String nome;
 	private String alfabeto;
@@ -8,10 +10,10 @@ public class Configuracao {
 
 	public Configuracao(String nome, String alfabeto, int tamanhoSenha, int maxTentativas) {
 		super();
-		this.nome = nome;
-		this.alfabeto = alfabeto;
-		this.tamanhoSenha = tamanhoSenha;
-		this.maxTentativas = maxTentativas;
+		setNome(nome);
+		setAlfabeto(alfabeto);
+		setTamanhoSenha(tamanhoSenha);
+		setMaxTentativas(maxTentativas);
 	}
 
 	public Configuracao() {
@@ -37,33 +39,13 @@ public class Configuracao {
 		if (alfabeto.length() < 5) {
 			throw new IllegalArgumentException("Alfabeto deve ter pelo menos 5 caracteres");
 		}
-		if (verificarRepeticao(alfabeto)) {
+		if (Utilit.verificarRepeticaoCaracteres(alfabeto)) {
 			throw new IllegalArgumentException("Alfabeto não deve conter caracteres repetidos");
 		}
-		if (verificarTemNumero(alfabeto)) {
+		if (Utilit.verificarTemNumero(alfabeto)) {
 			throw new IllegalArgumentException("Alfabeto não deve conter números");
 		}
 		this.alfabeto = alfabeto;
-	}
-
-	protected boolean verificarRepeticao(String alfabeto) {
-		for (int i = 0; i < alfabeto.length(); i++) {
-			for (int j = i + 1; j < alfabeto.length(); j++) {
-				if (alfabeto.charAt(i) == alfabeto.charAt(j)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-	protected boolean verificarTemNumero(String alfabeto) {
-		for (int i = 0; i < alfabeto.length(); i++) {
-			if (Character.isDigit(alfabeto.charAt(i))) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public int getTamanhoSenha() {
