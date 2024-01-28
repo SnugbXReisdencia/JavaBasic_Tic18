@@ -9,7 +9,6 @@ public class Configuracao {
 	private int maxTentativas;
 
 	public Configuracao(String nome, String alfabeto, int tamanhoSenha, int maxTentativas) {
-		super();
 		setNome(nome);
 		setAlfabeto(alfabeto);
 		setTamanhoSenha(tamanhoSenha);
@@ -25,6 +24,9 @@ public class Configuracao {
 	}
 
 	public void setNome(String nome) {
+		if (nome == null || nome.isEmpty()) {
+			throw new IllegalArgumentException("Nome não pode ser nulo ou vazio");
+		}
 		this.nome = nome;
 	}
 
@@ -36,7 +38,7 @@ public class Configuracao {
 		if (alfabeto == null) {
 			throw new IllegalArgumentException("Alfabeto não pode ser nulo");
 		}
-		if (alfabeto.length() < 5) {
+		if (alfabeto.length() < 4) {
 			throw new IllegalArgumentException("Alfabeto deve ter pelo menos 5 caracteres");
 		}
 		if (Utilit.verificarRepeticaoCaracteres(alfabeto)) {
@@ -53,6 +55,12 @@ public class Configuracao {
 	}
 
 	public void setTamanhoSenha(int tamanhoSenha) {
+		if (tamanhoSenha < 1) {
+			throw new IllegalArgumentException("Senha deve ter ao menos 1 caracter");
+		}
+		if (tamanhoSenha > this.alfabeto.length()) {
+			throw new IllegalArgumentException("Senha não pode ser maior que o alfabeto");
+		}
 		this.tamanhoSenha = tamanhoSenha;
 	}
 
@@ -61,6 +69,12 @@ public class Configuracao {
 	}
 
 	public void setMaxTentativas(int maxTentativas) {
+		if (maxTentativas < 1) {
+			throw new IllegalArgumentException("Número máximo de tentativas deve ser maior que 0");
+		}
+		if (maxTentativas > this.alfabeto.length()) {
+			throw new IllegalArgumentException("Número máximo de tentativas deve ser menor que o tamanho do alfabeto");
+		}
 		this.maxTentativas = maxTentativas;
 	}
 
