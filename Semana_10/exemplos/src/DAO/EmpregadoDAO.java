@@ -1,4 +1,4 @@
-package dao;
+package DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,9 +8,8 @@ import model.Empregado;
 
 public class EmpregadoDAO {
 	
-	public void insertUsuario(Empregado emp) throws SQLException {
-		DAO dao = new DAO();
-		Connection con = dao.conectar();
+	public static void insertUsuario(Empregado emp) throws SQLException {
+		Connection con = DAO.conectar();
 		String query = "INSERT INTO Empregado (CPF, Nome, Salario, Genero) VALUES (?, ?, ?, ?)";
 		try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
 			preparedStatement.setString(1, emp.getCpf());
@@ -21,12 +20,11 @@ public class EmpregadoDAO {
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			dao.closeConnection(con);
+			DAO.close(con);
 		}
 	}
 	
 	public static void main(String[] args) {
-		EmpregadoDAO dao = new EmpregadoDAO();
 		Empregado emp = new Empregado("Jubileu", "546987457", 620300, "M");
 		Empregado emp2 = new Empregado("ana", "466987457", 612200, "F");
 		Empregado emp3 = new Empregado("João", "316586458", 402600, "M");
@@ -36,13 +34,13 @@ public class EmpregadoDAO {
 		Empregado emp7 = new Empregado("Sui", "756586459", 220800, "F");
 		
 		try {
-			dao.insertUsuario(emp);
-			dao.insertUsuario(emp2);
-			dao.insertUsuario(emp3);
-			dao.insertUsuario(emp4);
-			dao.insertUsuario(emp5);
-			dao.insertUsuario(emp6);
-			dao.insertUsuario(emp7);
+			EmpregadoDAO.insertUsuario(emp);
+			EmpregadoDAO.insertUsuario(emp2);
+			EmpregadoDAO.insertUsuario(emp3);
+			EmpregadoDAO.insertUsuario(emp4);
+			EmpregadoDAO.insertUsuario(emp5);
+			EmpregadoDAO.insertUsuario(emp6);
+			EmpregadoDAO.insertUsuario(emp7);
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

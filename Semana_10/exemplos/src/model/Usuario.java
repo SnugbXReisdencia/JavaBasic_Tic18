@@ -10,6 +10,9 @@ public class Usuario {
 		setSenha(senha);
 		setEmail(email);
 	}
+	public Usuario() {
+		
+	}
 	
 	public String getNome() {
 		return nome;
@@ -28,5 +31,8 @@ public class Usuario {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String toString() {
+		return "\nNome: " + nome + "\nSenha: " + senha + "\nEmail: " + email+ "\n----------------------------------------\n";
 	}
 }

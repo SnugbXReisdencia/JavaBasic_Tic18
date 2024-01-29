@@ -1,4 +1,4 @@
-package dao;
+package DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,34 +13,34 @@ public class DAO {
 	static final String USER = "ulvqicajnzf0m3xa";
 	static final String PASSWORD = "VorBiomqmPV9HiQgpYFb";
 	
-	public Connection conectar() {
+	public static Connection conectar() {
 		Connection con = null;
 		try {
 			
-			con = DriverManager.getConnection(URL);
-			System.out.println("Conexão Feita com Sucesso !!!! ");
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			//System.out.println("Conexão Feita com Sucesso !!!! ");
 		} catch (SQLException ex) {
 			throw new RuntimeException("Erro na conexão com o Banco de dados: ", ex);
 		}
 		return con;
 	}
 	
-	public void closeConnection(Connection con) {
+	public static void close(Connection con) {
 		try {
 			if (con != null) {
 				con.close();
-				System.out.println("Conexão fechada !!!");
+				//System.out.println("Conexão fechada !!!");
 			}
 		} catch (SQLException ex) {
 			Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 	
-	public void testeConnexao() {
+	public static void testeConnexao() {
 		try {
 			Connection con = conectar();
 			System.out.println(con);
-			closeConnection(con);
+			close(con);
 		} catch (Exception e) {
 			System.out.println("Jubileu: " + e);
 		}
@@ -48,8 +48,7 @@ public class DAO {
 	}
 	
 	public static void main(String[] args) {
-		DAO dao = new DAO();
-		dao.testeConnexao();
+		DAO.testeConnexao();
 		
 	}
 }
