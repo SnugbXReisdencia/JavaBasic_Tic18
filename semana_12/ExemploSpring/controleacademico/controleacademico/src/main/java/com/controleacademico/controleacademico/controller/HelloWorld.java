@@ -11,7 +11,7 @@ import com.controleacademico.controleacademico.controller.rsa.RSAGenerator;
 @RestController
 public class HelloWorld {
 	
-	private int primo = 2;
+	private int primo = 0;
 	private int sequencia = 0;
 	private Key keypub;
 	private Key keypriv;
@@ -75,21 +75,28 @@ public class HelloWorld {
 	}
 	
 ////	Gerador de numeros em sequencia primeiros
-//	@RequestMapping("/sequenciaprimeiros")
-//	public int sequenciaprimeiros() {
-//		int cont = 0;
-//		int anterior = primo;
-//		for (int i = 1; i < anterior; i++) {
-//			if (anterior % i == 0) {
-//				cont++;
-//			}
-//		}
-//		if (cont == 2) {
-//			primo++;
-//			return anterior;
-//		}
-//		primo++;
-//		return anterior;
-//	}
+	@RequestMapping("/sequenciaprimeiros")
+	public int SequenciaPrimos() {
+		primo++;
+	    while (!isPrimo(primo)) {
+	    	primo++;
+	    }
+	    
+	    return primo;
+	}
+	
+	private boolean isPrimo(int numero) {
+	    if (numero <= 1) {
+	        return false;
+	    }
+
+	    for (int i = 2; i <= Math.sqrt(numero); i++) {
+	        if (numero % i == 0) {
+	            return false;
+	        }
+	    }
+
+	    return true;
+	}
 	
 }
