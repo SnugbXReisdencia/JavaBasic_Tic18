@@ -3,7 +3,7 @@ package com.EverDev.CompaniaAerea.controller.dto;
 import com.EverDev.CompaniaAerea.model.Piloto;
 
 public class PilotoDTO {
-	private Integer id;
+	private Long id;
 	private String nome;
 	private String numBreve;
 	
@@ -17,7 +17,7 @@ public class PilotoDTO {
 		this.numBreve = piloto.getNumBreve();
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
