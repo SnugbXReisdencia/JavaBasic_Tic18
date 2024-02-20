@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,16 +13,21 @@ import com.EverDev.CompaniaAerea.model.ModeloAeronave;
 import com.EverDev.CompaniaAerea.repository.ModeloAeronaveRepository;
 
 @RestController
+@RequestMapping("/modeloAeronave/")
 public class ModeloAeronaveController {
 	
 	@Autowired
 	private ModeloAeronaveRepository modeloAeronaveRepository;
 		
-	@RequestMapping("/modeloAeronave/")
-	public List<ModeloAeronaveDTO> getModeloAeronave(String fabricante) {
+	@GetMapping
+	public List<ModeloAeronaveDTO> getModeloAeronave(String fabricante, String nome) {
 		List<ModeloAeronave> modeloAeronaves;
-		if (fabricante != null) {
+		if(nome != null) {
+			modeloAeronaves = modeloAeronaveRepository.findByNome(nome);
+			
+		}else if(fabricante != null) {
 			modeloAeronaves = modeloAeronaveRepository.findByFabricante(fabricante);
+			
 		}else {
 			modeloAeronaves = modeloAeronaveRepository.findAll();
 		}
