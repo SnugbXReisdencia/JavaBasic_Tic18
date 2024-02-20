@@ -17,9 +17,15 @@ public class PilotoController {
 	@Autowired
 	private PilotoRepository pilotoRepository;
 	
-	@RequestMapping("/pilotos")
-	public List<PilotoDTO> getPilotos() {
-		List<Piloto> pilotos = pilotoRepository.findAll();
+	@RequestMapping("/pilotos/")
+	public List<PilotoDTO> getPilotos(String nome) {
+		List<Piloto> pilotos;
+		if (nome != null) {
+			pilotos = pilotoRepository.findByNome(nome);
+		}else {
+			pilotos = pilotoRepository.findAll();
+		}
+		
 		return pilotos.stream().map(PilotoDTO::new).collect(Collectors.toList());
 	}
 }
