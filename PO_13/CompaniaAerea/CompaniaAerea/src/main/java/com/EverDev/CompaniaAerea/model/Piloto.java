@@ -9,26 +9,26 @@ import jakarta.persistence.Id;
 public class Piloto {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	private String nome;
 	private String numBreve;
 	
 	public Piloto() {}
 	
 	
-	public Piloto(Integer id, String nome, String numBreve) {
+	public Piloto(Long id, String nome, String numBreve) {
 		setId(id);
 		setNome(nome);
 		setNumBreve(numBreve);
 	}
 
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
