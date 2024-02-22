@@ -1,15 +1,22 @@
 package com.redesocial.redesocial.controller;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.redesocial.redesocial.controller.dto.UserDTO;
+import com.redesocial.redesocial.controller.form.UserForme;
 import com.redesocial.redesocial.model.Usuario;
 import com.redesocial.redesocial.model.repository.UsuarioRepository;
 
@@ -26,7 +33,7 @@ public class UsuarioController{
 	}
 	
 	@GetMapping
-	public String listar(String name){
+	public String listar(String name) {
 		List<Usuario> usuarios;
 		if (name != null) {
 			usuarios = (ArrayList<Usuario>) userRepository.findByName(name);
@@ -53,6 +60,7 @@ public class UsuarioController{
 		retorno += "<table class=\"table\">";
 		retorno += "<thead>";
 		retorno += "<tr>";
+		retorno += "<th scope=\"col\">#ID</th>";
 		retorno += "<th scope=\"col\">Nome</th>";
 		retorno += "<th scope=\"col\">Email</th>";
 		retorno += "</tr>";
@@ -60,6 +68,7 @@ public class UsuarioController{
 		retorno += "<tbody>";
 		for (UserDTO user : users) {
 			retorno += "<tr>";
+			retorno += "<td>" + user.getId() + "</td>";
 			retorno += "<td>" + user.getName() + "</td>";
 			retorno += "<td>" + user.getEmail() + "</td>";
 			if (name == null) {
@@ -75,6 +84,24 @@ public class UsuarioController{
 		return retorno;
 	}
 	
+	@PostMapping
+	public ResponseEntity<UserDTO> inserir(@RequestBody UserForme user, UriComponentsBuilder uriBuilder) {
+		Usuario usuario = user.toUsuario();
+		//Verificar se o nome ja existe
+		if (userRepository.findByName(user.getName()).size() > 0 && userRepository.findByEmail(user.getEmail()).size() > 0) {
+			System.out.println("Ja existe");
+			return ResponseEntity.badRequest().body(null);
+		}
+		userRepository.save(usuario);
+		URI uri = uriBuilder.path("/usuario/{id}").buildAndExpand(usuario.getId()).toUri();
+		return ResponseEntity.created(uri).body(new UserDTO(usuario));
+	}
 	
+	@PutMapping
+	public UserDTO alterar(@RequestBody UserForme user) {
+		Usuario usuario = user.toUsuario();
+		userRepository.saveAndFlush(usuario);
+		return new UserDTO(usuario);
+	}
 	
 }

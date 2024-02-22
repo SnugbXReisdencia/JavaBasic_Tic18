@@ -5,15 +5,24 @@ import com.redesocial.redesocial.model.Usuario;
 public class UserDTO {
 
 	Usuario user;
+	private Long id;
 	private String name;
 	private String email;
-	private String senha;
+	
 	
 	public UserDTO(Usuario user) {
 		this.user = user;
+		this.id = user.getId();
 		this.name = user.getName();
 		this.email = user.getEmail();
-		this.senha = user.getSenha();
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -24,13 +33,10 @@ public class UserDTO {
 		return email;
 	}
 
-	public String getSenha() {
-		return senha;
-	}
-
+	
 	@Override
 	public String toString() {
-		return "[\n name=" + name + "\n email=" + email + "\n senha=" + senha + "\n]";
+		return "[\n name=" + name + "\n email=" + email + "\n ID=" + id + "\n]";
 	}
 	
 	

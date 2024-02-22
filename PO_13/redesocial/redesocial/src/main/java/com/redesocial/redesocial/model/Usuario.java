@@ -1,5 +1,6 @@
 package com.redesocial.redesocial.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,8 +11,9 @@ public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	private String name;
+	//@Column(unique = true)
 	private String email;
 	private String senha;
 	
@@ -19,18 +21,18 @@ public class Usuario {
 		
 	}
 	
-	public Usuario(int id, String name, String email, String password) {
+	public Usuario(Long id, String name, String email, String password) {
 		setId(id);
 		setName(name);
 		setEmail(email);
 		setSenha(password);
 	}
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
