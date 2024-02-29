@@ -82,7 +82,7 @@ public class ConcorrenteController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteConcorrente(@PathVariable Long id) {
 		try {
-			Concorrente concorrente = concorrenteRepository.findById(id).get();
+			Concorrente concorrente = concorrenteRepository.getReferenceById(id);
 			if (concorrente == null) {
 				return ResponseEntity.notFound().build();
 			}
