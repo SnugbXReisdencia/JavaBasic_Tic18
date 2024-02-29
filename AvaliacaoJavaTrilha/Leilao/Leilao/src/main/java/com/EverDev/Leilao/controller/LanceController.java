@@ -26,7 +26,7 @@ import com.EverDev.Leilao.repository.LanceRespository;
 import com.EverDev.Leilao.repository.LeilaoRepository;
 
 @RestController
-@RequestMapping("/lance")
+@RequestMapping("/lance/")
 public class LanceController {
 	
 	@Autowired
